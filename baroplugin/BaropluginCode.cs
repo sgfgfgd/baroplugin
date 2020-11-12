@@ -187,10 +187,10 @@
 
                                 sw.WriteLine("[200]");
                                 sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
-                                sw.WriteLine("deltat = " + (750 - Math.Round(s.pressure * 0.750062, 2)).ToString());
-                                sw.WriteLine("winddir = " + (s.windDir / 100).ToString());
-                                sw.WriteLine("windspeed = " + (s.windSpeed / 100).ToString());
-                                sw.WriteLine(System.Environment.NewLine);
+                                sw.WriteLine("deltat = " + (s.temperature/100).ToString());
+                        sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
+                        sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
+                        sw.WriteLine(System.Environment.NewLine);
                         flag = true;
                             }
                             
@@ -202,9 +202,9 @@
                     {
                         sw.WriteLine("[400]");
                         sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
-                        sw.WriteLine("deltat = " + (750 - Math.Round(s.pressure * 0.750062, 2)).ToString());
-                        sw.WriteLine("winddir = " + (s.windDir / 100).ToString());
-                        sw.WriteLine("windspeed = " + (s.windSpeed / 100).ToString());
+                        sw.WriteLine("deltat = " + (s.temperature / 100).ToString());
+                        sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
+                        sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
                         flag = false;
                     }
@@ -213,42 +213,113 @@
 
                 if ((lay == 800) && (flag == false))
                 {
+                    using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
+                    {
 
+                        sw.WriteLine("[800]");
+                        sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
+                        sw.WriteLine("deltat = " + (s.temperature / 100).ToString());
+                        sw.WriteLine("winddir = " + Math.Round(s.windDir,3).ToString());
+                        sw.WriteLine("windspeed = " + Math.Round(s.windSpeed,3).ToString());
+                        sw.WriteLine(System.Environment.NewLine);
+                        flag = true;
+                    }
 
                 }
 
                 if ((lay == 1200) && (flag == true))
                 {
+                    using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
+                    {
 
+                        sw.WriteLine("[1200]");
+                        sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
+                        sw.WriteLine("deltat = " + (s.temperature / 100).ToString());
+                        sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
+                        sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
+                        sw.WriteLine(System.Environment.NewLine);
+                        flag = false;
+                    }
 
                 }
 
                 if ((lay == 1600) && (flag == false))
                 {
+                    using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
+                    {
+
+                        sw.WriteLine("[1600]");
+                        sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
+                        sw.WriteLine("deltat = " + (s.temperature / 100).ToString());
+                        sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
+                        sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
+                        sw.WriteLine(System.Environment.NewLine);
+                        flag = true;
+                    }
 
 
                 }
 
                 if ((lay == 2000) && (flag == true))
                 {
+                    using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
+                    {
 
+                        sw.WriteLine("[2000]");
+                        sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
+                        sw.WriteLine("deltat = " + (s.temperature / 100).ToString());
+                        sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
+                        sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
+                        sw.WriteLine(System.Environment.NewLine);
+                        flag = false;
+                    }
 
                 }
 
                 if ((lay == 2400) && (flag == false))
                 {
+                    using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
+                    {
 
+                        sw.WriteLine("[2400]");
+                        sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
+                        sw.WriteLine("deltat = " + (s.temperature / 100).ToString());
+                        sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
+                        sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
+                        sw.WriteLine(System.Environment.NewLine);
+                        flag = true;
+                    }
                 }
 
                 if ((lay == 3000) && (flag == true))
                 {
+                    using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
+                    {
 
+                        sw.WriteLine("[3000]");
+                        sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
+                        sw.WriteLine("deltat = " + (s.temperature / 100).ToString());
+                        sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
+                        sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
+                        sw.WriteLine(System.Environment.NewLine);
+                        flag = false;
+                    }
                 }
 
                 if ((lay == 3500) && (flag == false))
                 {
 
+                    using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
+                    {
 
+                        sw.WriteLine("[3500]");
+                        sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
+                        sw.WriteLine("deltat = " + (s.temperature / 100).ToString());
+                        sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
+                        sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
+                        sw.WriteLine(System.Environment.NewLine);
+                        flag = true;
+                    }
                 }
 
 
