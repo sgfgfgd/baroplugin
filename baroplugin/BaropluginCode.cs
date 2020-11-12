@@ -25,6 +25,7 @@
         public int lay = 0;
         public bool rec = false;
         public bool flag;
+        double tempkef = 0;
 
         public struct Vars
         {
@@ -106,16 +107,16 @@
             {
                 var alt = linkMessage.ToStructure<MAVLink.mavlink_local_position_ned_t>();
                 s.altitude = alt.z * (-1);
-                if ((s.altitude >= 0) && (s.altitude <=10)) lay = 0;
-                if ((s.altitude >= 200) && (s.altitude <= 210)) lay = 200;
-                if ((s.altitude >= 400) && (s.altitude <= 410)) lay = 400;
-                if ((s.altitude >= 800) && (s.altitude <= 810)) lay = 800;
-                if ((s.altitude >= 1200) && (s.altitude <= 1210)) lay = 1200;
-                if ((s.altitude >= 1600) && (s.altitude <= 1620)) lay = 1600;
-                if ((s.altitude >= 2000) && (s.altitude <= 2010)) lay = 2000;
-                if ((s.altitude >= 2400) && (s.altitude <= 2410)) lay = 2400;
-                if ((s.altitude >= 3000) && (s.altitude <= 3010)) lay = 3000;
-                if ((s.altitude >= 3500) && (s.altitude <= 3510)) lay = 3500;
+                if ((s.altitude >= 0) && (s.altitude <200)) lay = 0;
+                if ((s.altitude >= 200) && (s.altitude < 400)) lay = 200;
+                if ((s.altitude >= 400) && (s.altitude < 800)) lay = 400;
+                if ((s.altitude >= 800) && (s.altitude < 1200)) lay = 800;
+                if ((s.altitude >= 1200) && (s.altitude < 1600)) lay = 1200;
+                if ((s.altitude >= 1600) && (s.altitude < 2000)) lay = 1600;
+                if ((s.altitude >= 2000) && (s.altitude < 2400)) lay = 2000;
+                if ((s.altitude >= 2400) && (s.altitude < 3000)) lay = 2400;
+                if ((s.altitude >= 3000) && (s.altitude < 3500)) lay = 3000;
+                if (s.altitude >= 3500)  lay = 3500;
             }
             if ((MAVLink.MAVLINK_MSG_ID)linkMessage.msgid == MAVLink.MAVLINK_MSG_ID.WIND)
             {
@@ -132,7 +133,15 @@
         {
             DateTime date = DateTime.Now;
             //string path = @"C:\" + date.ToShortTimeString.ToString("HH-mm")+ ".ini";
+            
 
+            if (s.temperature < 0) tempkef = 0;
+            if ((s.temperature >= 0) && (s.temperature < 5)) tempkef = 0.5;
+            if ((s.temperature >= 5) && (s.temperature < 15)) tempkef = 1;
+            if ((s.temperature >= 15) && (s.temperature <= 20)) tempkef = 1.5;
+            if ((s.temperature > 20) && (s.temperature <= 25)) tempkef =2;
+            if ((s.temperature > 25) && (s.temperature <= 30)) tempkef = 3.5;
+            if ((s.temperature > 30) && (s.temperature <= 40)) tempkef = 4.5;
 
             //string writePath = @"C:\meteo.ini";
             using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default))
@@ -141,7 +150,7 @@
                 sw.WriteLine("datetime = " + date.ToShortDateString() + "-" + date.ToShortTimeString());
                 sw.WriteLine("altitude = " + Math.Round(s.alt_sea / 1000, 2));
                 sw.WriteLine("deltah = " + (750-Math.Round(s.pressure * 0.750062, 2)).ToString());
-                sw.WriteLine("deltavt = " + (s.temperature / 100).ToString());
+                sw.WriteLine("deltavt = " + ((s.temperature/100) + tempkef - 15.9).ToString());
                 sw.WriteLine(System.Environment.NewLine);
 
                 sw.WriteLine("[0]");
@@ -151,7 +160,7 @@
                 sw.WriteLine("windspeed = " + (s.temperature / 100).ToString());
                 sw.WriteLine(System.Environment.NewLine);
 
-            }
+            } 
                 
         }
 
@@ -169,77 +178,88 @@
             
             if (rec == true)
             {
-                switch (lay)
-                {
-
-                    case 200:
-                        if (flag == false)
+                                    
+                        if ((lay == 200) && (flag==false))
                         {
-
+                    
                             using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
                             {
 
                                 sw.WriteLine("[200]");
                                 sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
                                 sw.WriteLine("deltat = " + (750 - Math.Round(s.pressure * 0.750062, 2)).ToString());
-                                sw.WriteLine("winddir = " + (s.temperature / 100).ToString());
-                                sw.WriteLine("windspeed = " + (s.temperature / 100).ToString());
+                                sw.WriteLine("winddir = " + (s.windDir / 100).ToString());
+                                sw.WriteLine("windspeed = " + (s.windSpeed / 100).ToString());
                                 sw.WriteLine(System.Environment.NewLine);
-                                flag = true;
+                        flag = true;
                             }
                             
                         }
-                            break;
-                        
-                    case 400:
-                        if (flag == true)
-                        {
-                            using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
-                            {
-                                sw.WriteLine("[400]");
-                                sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
-                                sw.WriteLine("deltat = " + (750 - Math.Round(s.pressure * 0.750062, 2)).ToString());
-                                sw.WriteLine("winddir = " + (s.temperature / 100).ToString());
-                                sw.WriteLine("windspeed = " + (s.temperature / 100).ToString());
-                                sw.WriteLine(System.Environment.NewLine);
-                                flag = false;
-                            }
-                            
-                        }
-                        break;
 
-                    case 800:
-
-                        break;
-
-                    case 1200:
-
-                        break;
-
-                    case 1600:
-
-                        break;
-
-                    case 2000:
-
-                        break;
-
-                    case 2400:
-
-                        break;
-
-                    case 3000:
-
-                        break;
-
-                    case 3500:
-
-                        break;
-  
+                if ((lay == 400) && (flag == true))
+                {
+                    using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
+                    {
+                        sw.WriteLine("[400]");
+                        sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
+                        sw.WriteLine("deltat = " + (750 - Math.Round(s.pressure * 0.750062, 2)).ToString());
+                        sw.WriteLine("winddir = " + (s.windDir / 100).ToString());
+                        sw.WriteLine("windspeed = " + (s.windSpeed / 100).ToString());
+                        sw.WriteLine(System.Environment.NewLine);
+                        flag = false;
+                    }
                 }
+
+
+                if ((lay == 800) && (flag == false))
+                {
+
+
+                }
+
+                if ((lay == 1200) && (flag == true))
+                {
+
+
+                }
+
+                if ((lay == 1600) && (flag == false))
+                {
+
+
+                }
+
+                if ((lay == 2000) && (flag == true))
+                {
+
+
+                }
+
+                if ((lay == 2400) && (flag == false))
+                {
+
+                }
+
+                if ((lay == 3000) && (flag == true))
+                {
+
+                }
+
+                if ((lay == 3500) && (flag == false))
+                {
+
+
+                }
+
+
 
             }
 
+            if (rec == false)
+            {
+
+
+            }
 
             return true;
         }
