@@ -26,6 +26,19 @@
         public bool rec = false;
         public bool flag;
         double tempkef = 0;
+        int[,] delt = new int[9,14] { {-1,-2,-3,-4,-5,-6,-7,-8,-8,-9,-20,-29,-39,-49},
+            {-1,-2,-3,-4,-5,-6,-6,-7,-8,-9,-19,-29,-38,-48}, {-1,-2,-3,-4,-5,-6,-6,-7,-7,-8,-18,-28,-37,-46},
+            {-1,-2,-3,-4,-4,-5,-5,-6,-7,-8,-17,-26,-35,-44}, {-1,-2,-3,-3,-4,-4,-5,-6,-7,-7,-17,-25,-34,-42},
+            {-1,-2,-3,-3,-4,-4,-5,-6,-6,-7,-16,-24,-32,-40}, {-1,-2,-2,-3,-4,-4,-5,-5,-6,-7,-15,-23,-31,-38},
+            {-1,-2,-2,-3,-4,-4,-4,-5,-5,-6,-15,-22,-30,-37}, {-1,-2,-2,-3,-4,-4,-4,-4,-5,-6,-14,-20,-27,-34} };
+
+        int[,] deltz = new int[,] { {1,2,3,4,5,6,7,8,9,10,20,30,0,0},
+            {1,2,3,4,5,6,7,8,9,10,20,30,0,0}, {1,2,3,4,5,6,7,8,9,10,20,30,0,0},
+            {1,2,3,4,5,6,7,8,9,10,20,30,0,0}, {1,2,3,4,5,6,7,8,9,10,20,30,0,0}, 
+            {1,2,3,4,5,6,7,8,9,10,20,30,0,0}, {1,2,3,4,5,6,7,8,9,10,20,30,0,0},
+            {1,2,3,4,5,6,7,8,9,10,20,30,0,0}, {1,2,3,4,5,6,7,8,9,10,20,30,0,0} };
+        int[] dt = new int[14] {1,2,3,4,5,6,7,8,9,10,20,30,40,50};
+        int[] altz = new int[9] {200,400,800,1200,1600,2000,2400,3000,4000};
 
         public struct Vars
         {
@@ -333,6 +346,46 @@
             }
 
             return true;
+        }
+
+        int avtemp(double nulltemp, int layer)
+        {
+            int avtemp = 0;
+            int tempx = 0, tempy = 0, tempa = 0;
+            int temp = Math.Abs(Convert.ToInt32(Math.Round(nulltemp)));
+            if (nulltemp>0)
+            {
+                  for (int i =0;i<dt.Length;i++)
+                {
+                    if (temp/10 == dt[i]) { tempx = i; }
+                    if (temp%10 == dt[i]) { tempy = i; }
+                }
+                  for (int i = 0;i<altz.Length;i++)
+                {
+                    if (layer == altz[i]) { tempa = i; }
+                }
+
+                avtemp = deltz[tempa, tempx] + deltz[tempa, tempy];
+            }
+
+            if (nulltemp<0)
+            {
+                for (int i = 0; i < dt.Length; i++)
+                {
+                    if (temp / 10 == dt[i]) { tempx = i; }
+                    if (temp % 10 == dt[i]) { tempy = i; }
+                }
+                for (int i = 0; i < altz.Length; i++)
+                {
+                    if (layer == altz[i]) { tempa = i; }
+                }
+
+               avtemp = delt[tempa, tempx] + delt[tempa, tempy];
+            }
+
+
+
+            return avtemp;
         }
     }
 
