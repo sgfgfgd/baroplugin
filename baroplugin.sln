@@ -5,6 +5,19 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "baroplugin", "baroplugin\baroplugin.csproj", "{73F9E014-41F0-47E5-BBDC-0FCB0007C8AB}"
 EndProject
+Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "MissionPlanner", "C:\Program Files (x86)\Mission Planner\MissionPlanner.exe", "{D418B914-C12F-496D-B885-1ABAC239B73A}"
+	ProjectSection(DebuggerProjectSystem) = preProject
+		PortSupplier = 00000000-0000-0000-0000-000000000000
+		Executable = C:\Program Files (x86)\Mission Planner\MissionPlanner.exe
+		RemoteMachine = USER-ПК
+		StartingDirectory = C:\Program Files (x86)\Mission Planner
+		Environment = По умолчанию
+		LaunchingEngine = 00000000-0000-0000-0000-000000000000
+		UseLegacyDebugEngines = No
+		LaunchSQLEngine = No
+		AttachLaunchAction = No
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +28,8 @@ Global
 		{73F9E014-41F0-47E5-BBDC-0FCB0007C8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73F9E014-41F0-47E5-BBDC-0FCB0007C8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73F9E014-41F0-47E5-BBDC-0FCB0007C8AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D418B914-C12F-496D-B885-1ABAC239B73A}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{D418B914-C12F-496D-B885-1ABAC239B73A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

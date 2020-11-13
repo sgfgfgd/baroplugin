@@ -39,6 +39,7 @@
             {1,2,3,4,5,6,7,8,9,10,20,30,0,0}, {1,2,3,4,5,6,7,8,9,10,20,30,0,0} };
         int[] dt = new int[14] {1,2,3,4,5,6,7,8,9,10,20,30,40,50};
         int[] altz = new int[9] {200,400,800,1200,1600,2000,2400,3000,4000};
+        double nulltempz = 0;
 
         public struct Vars
         {
@@ -156,6 +157,7 @@
             if ((s.temperature > 25) && (s.temperature <= 30)) tempkef = 3.5;
             if ((s.temperature > 30) && (s.temperature <= 40)) tempkef = 4.5;
 
+            nulltempz = s.temperature / 100 + tempkef - 15.9;
             //string writePath = @"C:\meteo.ini";
             using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default))
             {
@@ -200,7 +202,7 @@
 
                                 sw.WriteLine("[200]");
                                 sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
-                                sw.WriteLine("deltat = " + (s.temperature/100).ToString());
+                                sw.WriteLine("deltat = " + avtemp(nulltempz,lay).ToString());
                         sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
                         sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
@@ -215,7 +217,7 @@
                     {
                         sw.WriteLine("[400]");
                         sw.WriteLine("altitude = " + Math.Round(s.altitude, 2));
-                        sw.WriteLine("deltat = " + (s.temperature / 100).ToString());
+                        sw.WriteLine("deltat = " + avtemp(nulltempz, lay).ToString());
                         sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
                         sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
@@ -352,7 +354,7 @@
         {
             int avtemp = 0;
             int tempx = 0, tempy = 0, tempa = 0;
-            int temp = Math.Abs(Convert.ToInt32(Math.Round(nulltemp)));
+            int temp = Math.Abs(Convert.ToInt32(nulltemp));
             if (nulltemp>0)
             {
                   for (int i =0;i<dt.Length;i++)
