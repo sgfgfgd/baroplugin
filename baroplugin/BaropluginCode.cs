@@ -103,10 +103,10 @@
         {
                         
             
-            if ((MAVLink.MAVLINK_MSG_ID)linkMessage.msgid == MAVLink.MAVLINK_MSG_ID.SCALED_PRESSURE)
+            if ((MAVLink.MAVLINK_MSG_ID)linkMessage.msgid == MAVLink.MAVLINK_MSG_ID.SCALED_PRESSURE3)
             {
                 
-                var pres = linkMessage.ToStructure<MAVLink.mavlink_scaled_pressure_t>();
+                var pres = linkMessage.ToStructure<MAVLink.mavlink_scaled_pressure3_t>();
                 s.pressure = pres.press_abs;
                 s.temperature = pres.temperature;
             }
@@ -168,6 +168,7 @@
                 sw.WriteLine("deltavt = " + ((s.temperature/100) + tempkef - 15.9).ToString());
                 sw.WriteLine(System.Environment.NewLine);
 
+                
                 sw.WriteLine("[0]");
                 sw.WriteLine("altitude = 0");
                 sw.WriteLine("deltat = " + (750 - Math.Round(s.pressure * 0.750062, 2)).ToString());
@@ -359,7 +360,7 @@
             {
                   for (int i =0;i<dt.Length;i++)
                 {
-                    if (temp/10 == dt[i]) { tempx = i; }
+                    if (Convert.ToInt32(temp/10)*10 == dt[i]) { tempx = i; }
                     if (temp%10 == dt[i]) { tempy = i; }
                 }
                   for (int i = 0;i<altz.Length;i++)
@@ -374,7 +375,7 @@
             {
                 for (int i = 0; i < dt.Length; i++)
                 {
-                    if (temp / 10 == dt[i]) { tempx = i; }
+                    if (Convert.ToInt32(temp / 10) * 10 == dt[i]) { tempx = i; }
                     if (temp % 10 == dt[i]) { tempy = i; }
                 }
                 for (int i = 0; i < altz.Length; i++)

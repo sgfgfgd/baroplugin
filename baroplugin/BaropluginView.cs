@@ -11,6 +11,8 @@ using GMap.NET;
 using MissionPlanner;
 using MissionPlanner.Utilities;
 using UAVCAN;
+using System.IO;
+using System.Text.RegularExpressions;
 
 
 namespace baroplugin
@@ -130,6 +132,20 @@ namespace baroplugin
         {
             plugin.rec = false;
             button1.Enabled = true;
+
+            StreamReader sr = new StreamReader(nowpath);
+                string cont = sr.ReadToEnd();
+                sr.Close();
+            string patter = @"^datetime\w*";
+            DateTime date = DateTime.Now;
+            string targets = "datetime = " + date.ToShortDateString() + "-" + date.ToShortTimeString() + "test";
+            Regex regex = new Regex(patter);
+            cont = Regex.Replace(cont, @"^datetime\w*", targets);
+
+            StreamWriter wr = new StreamWriter(nowpath);
+            wr.Write(cont);
+            wr.Close();
+            
         }
     }
 }
