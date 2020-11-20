@@ -108,9 +108,10 @@
                 
                 var pres = linkMessage.ToStructure<MAVLink.mavlink_scaled_pressure3_t>();
                 s.pressure = pres.press_abs;
-                s.temperature = pres.temperature;
+                s.temperature = pres.temperature - 100;
             }
 
+            // пн 11 часов
             if ((MAVLink.MAVLINK_MSG_ID)linkMessage.msgid == MAVLink.MAVLINK_MSG_ID.GLOBAL_POSITION_INT)
             {
                 var alt_sea = linkMessage.ToStructure<MAVLink.mavlink_global_position_int_t>();
@@ -149,15 +150,15 @@
             //string path = @"C:\" + date.ToShortTimeString.ToString("HH-mm")+ ".ini";
             
 
-            if (s.temperature < 0) tempkef = 0;
-            if ((s.temperature >= 0) && (s.temperature < 5)) tempkef = 0.5;
-            if ((s.temperature >= 5) && (s.temperature < 15)) tempkef = 1;
-            if ((s.temperature >= 15) && (s.temperature <= 20)) tempkef = 1.5;
-            if ((s.temperature > 20) && (s.temperature <= 25)) tempkef =2;
-            if ((s.temperature > 25) && (s.temperature <= 30)) tempkef = 3.5;
-            if ((s.temperature > 30) && (s.temperature <= 40)) tempkef = 4.5;
+            if (s.temperature/100 < 0) tempkef = 0;
+            if ((s.temperature / 100 >= 0) && (s.temperature / 100 < 5)) tempkef = 0.5;
+            if ((s.temperature / 100 >= 5) && (s.temperature / 100 < 15)) tempkef = 1;
+            if ((s.temperature / 100 >= 15) && (s.temperature / 100 <= 20)) tempkef = 1.5;
+            if ((s.temperature / 100 > 20) && (s.temperature / 100 <= 25)) tempkef =2;
+            if ((s.temperature / 100 > 25) && (s.temperature / 100 <= 30)) tempkef = 3.5;
+            if ((s.temperature / 100 > 30) && (s.temperature / 100 <= 40)) tempkef = 4.5;
 
-            nulltempz = s.temperature / 100 + tempkef - 15.9;
+            nulltempz = (s.temperature / 100) + tempkef - 15.9;
             //string writePath = @"C:\meteo.ini";
             using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default))
             {

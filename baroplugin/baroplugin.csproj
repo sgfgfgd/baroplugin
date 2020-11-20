@@ -33,35 +33,35 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GMap.NET.Core">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Mission Planner\GMap.NET.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Mission Planner\GMap.NET.Core.dll</HintPath>
     </Reference>
     <Reference Include="MAVLink">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Mission Planner\MAVLink.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Mission Planner\MAVLink.dll</HintPath>
     </Reference>
     <Reference Include="MissionPlanner">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Mission Planner\MissionPlanner.exe</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Mission Planner\MissionPlanner.exe</HintPath>
     </Reference>
     <Reference Include="MissionPlanner.ArduPilot">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Mission Planner\MissionPlanner.ArduPilot.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Mission Planner\MissionPlanner.ArduPilot.dll</HintPath>
     </Reference>
     <Reference Include="MissionPlanner.Comms">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Mission Planner\MissionPlanner.Comms.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Mission Planner\MissionPlanner.Comms.dll</HintPath>
     </Reference>
     <Reference Include="MissionPlanner.Controls">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Mission Planner\MissionPlanner.Controls.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Mission Planner\MissionPlanner.Controls.dll</HintPath>
     </Reference>
     <Reference Include="MissionPlanner.Utilities">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Mission Planner\MissionPlanner.Utilities.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Mission Planner\MissionPlanner.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Mission Planner\netstandard.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Mission Planner\SharpDX.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Mission Planner\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.DirectInput">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Mission Planner\SharpDX.DirectInput.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Mission Planner\SharpDX.DirectInput.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -75,7 +75,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="UAVCAN, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Mission Planner\UAVCAN.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Mission Planner\UAVCAN.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
