@@ -15,6 +15,7 @@ namespace baroplugin
 {
     public partial class UserTab : UserControl
     {
+        
         public UserTab()
         {
             InitializeComponent();

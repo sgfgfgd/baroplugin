@@ -43,6 +43,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -203,11 +204,23 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.Location = new System.Drawing.Point(407, 50);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(60, 20);
+            this.label14.TabIndex = 17;
+            this.label14.Text = "label14";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
+            // 
             // BaropluginView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(690, 511);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -247,5 +260,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label14;
     }
 }

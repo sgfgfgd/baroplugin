@@ -108,7 +108,7 @@
                 
                 var pres = linkMessage.ToStructure<MAVLink.mavlink_scaled_pressure3_t>();
                 s.pressure = pres.press_abs;
-                s.temperature = pres.temperature - 100;
+                s.temperature = pres.temperature;
             }
 
             // пн 11 часов
@@ -350,6 +350,28 @@
             }
 
             return true;
+        }
+
+
+        public double Kalman (double temp)
+        {
+            double result=0;
+            double vartemp = 0.20;
+            double varproc = 0.1;
+            double Pc = 0;
+            double G = 2;
+            double P = 4;
+            double Xp = 4;
+            double Zp = 0;
+
+            Pc = P + varproc;
+            G = Pc / (Pc + vartemp);
+            P = (1 - G) * Pc;
+            Xp = result;
+            Zp = Xp;
+            result = G * (temp - Zp) + Xp;
+
+            return result;
         }
 
         int avtemp(double nulltemp, int layer)

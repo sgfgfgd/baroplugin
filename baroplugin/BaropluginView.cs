@@ -45,11 +45,12 @@ namespace baroplugin
         public void setvars(BaropluginCode.Vars s)
         {
             label4.Text = Math.Round(s.pressure * 0.750062, 2).ToString();
-            label3.Text = (s.temperature/100).ToString();
+            label3.Text = Math.Round(plugin.Kalman((s.temperature/100)),2).ToString(); 
             label8.Text = Math.Round(s.altitude, 2).ToString();
             label9.Text = Math.Round(s.windSpeed,3).ToString();
             label10.Text = Math.Round(s.windDir,3).ToString();
             label12.Text = (Math.Round(s.alt_sea, 2) / 1000).ToString();
+            label14.Text = Math.Round(s.temperature / 100,3).ToString();
         }
 
         public void upd(int u)
@@ -146,6 +147,11 @@ namespace baroplugin
             wr.Write(cont);
             wr.Close();
             
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
