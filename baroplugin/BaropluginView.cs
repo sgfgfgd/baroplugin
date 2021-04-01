@@ -111,7 +111,7 @@ namespace baroplugin
         private void button1_Click_1(object sender, EventArgs e)
         {
             DateTime date = DateTime.Now;
-            string path = @"C:\meteo-" + date.ToShortDateString() + "-" + date.Hour.ToString() + "-" + date.Minute.ToString() + ".ini";
+            string path = @"C:\meteo\meteo-" + date.ToShortDateString() + "-" + date.Hour.ToString() + "-" + date.Minute.ToString() + ".ini";
             plugin.FileWrite(path);
             nowpath = path;
             button1.Enabled = false;
@@ -133,19 +133,13 @@ namespace baroplugin
         {
             plugin.rec = false;
             button1.Enabled = true;
-
-            StreamReader sr = new StreamReader(nowpath);
-                string cont = sr.ReadToEnd();
-                sr.Close();
-            string patter = @"^datetime\w*";
             DateTime date = DateTime.Now;
-            string targets = "datetime = " + date.ToShortDateString() + "-" + date.ToShortTimeString() + "test";
-            Regex regex = new Regex(patter);
-            cont = Regex.Replace(cont, @"^datetime\w*", targets);
-
-            StreamWriter wr = new StreamWriter(nowpath);
-            wr.Write(cont);
-            wr.Close();
+            string targets = "datetime = " + date.ToShortDateString() + "-" + date.ToShortTimeString();
+            string[] cont = File.ReadAllLines(nowpath);
+            cont[1] = targets;
+            File.WriteAllLines(nowpath, cont);
+            
+           
             
         }
 

@@ -15,7 +15,7 @@ namespace baroplugin
 {
     public partial class UserTab : UserControl
     {
-        
+
         public UserTab()
         {
             InitializeComponent();
@@ -28,8 +28,8 @@ namespace baroplugin
 
         private void label1_Click(object sender, EventArgs e)
         {
-            
-           
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -48,15 +48,30 @@ namespace baroplugin
                 0, 0, 0, 0, 0, false);
         }
 
+
         async private void button3_Click(object sender, EventArgs e)
         {
-    //        MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 6, 0,
-    //            0, 0, 0, 0, 0, false);
-    //        await Task.Delay(1000);
+            int x = 0;
+            int num = 0;
+            TimerCallback tm = new TimerCallback(cnt);
+            System.Threading.Timer tmr = new System.Threading.Timer(tm, num, 0, 1000);
+            //        MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 6, 0,
+            //            0, 0, 0, 0, 0, false);
+            //        await Task.Delay(1000);
 
-    //        MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 6, 19000,
-    //            0, 0, 0, 0, 0, false);
-            
+            //        MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 6, 19000,
+            //            0, 0, 0, 0, 0, false);
+
+        }
+        public static int its = 0;
+        public static void cnt(object obj)
+        {
+            its++;
+
+
+            MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 6, 19000,
+                0, 0, 0, 0, 0, false);
+
         }
     }
 }

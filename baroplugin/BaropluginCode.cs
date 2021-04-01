@@ -39,6 +39,7 @@
             {1,2,3,4,5,6,7,8,9,10,20,30,0,0}, {1,2,3,4,5,6,7,8,9,10,20,30,0,0} };
         int[] dt = new int[14] {1,2,3,4,5,6,7,8,9,10,20,30,40,50};
         int[] altz = new int[9] {200,400,800,1200,1600,2000,2400,3000,4000};
+        int[] layflag = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         double nulltempz = 0;
 
         public struct Vars
@@ -111,7 +112,7 @@
                 s.temperature = pres.temperature;
             }
 
-            // пн 11 часов
+            
             if ((MAVLink.MAVLINK_MSG_ID)linkMessage.msgid == MAVLink.MAVLINK_MSG_ID.GLOBAL_POSITION_INT)
             {
                 var alt_sea = linkMessage.ToStructure<MAVLink.mavlink_global_position_int_t>();
@@ -165,16 +166,16 @@
                 sw.WriteLine("[Ground]");
                 sw.WriteLine("datetime = " + date.ToShortDateString() + "-" + date.ToShortTimeString());
                 sw.WriteLine("altitude = " + Math.Round(s.alt_sea / 1000, 2));
-                sw.WriteLine("deltah = " + (750-Math.Round(s.pressure * 0.750062, 2)).ToString());
-                sw.WriteLine("deltavt = " + ((s.temperature/100) + tempkef - 15.9).ToString());
+                sw.WriteLine("deltah = " + Math.Round((750-Math.Round(s.pressure * 0.750062, 3)),3).ToString());
+                sw.WriteLine("deltavt = " + (Math.Round(s.temperature / 100, 3) + tempkef - 15.9).ToString());
                 sw.WriteLine(System.Environment.NewLine);
 
                 
                 sw.WriteLine("[0]");
                 sw.WriteLine("altitude = 0");
-                sw.WriteLine("deltat = " + (750 - Math.Round(s.pressure * 0.750062, 2)).ToString());
-                sw.WriteLine("winddir = " + (s.temperature / 100).ToString());
-                sw.WriteLine("windspeed = " + (s.temperature / 100).ToString());
+                sw.WriteLine("deltat = " + avtemp(nulltempz, 200).ToString());
+                sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
+                sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                 sw.WriteLine(System.Environment.NewLine);
 
             } 
@@ -196,7 +197,7 @@
             if (rec == true)
             {
                                     
-                        if ((lay == 200) && (flag==false))
+                        if ((lay == 200) && (layflag[0]==0))
                         {
                     
                             using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
@@ -208,12 +209,12 @@
                         sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
                         sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
-                        flag = true;
+                        layflag[0] = 1;
                             }
                             
                         }
 
-                if ((lay == 400) && (flag == true))
+                if ((lay == 400) && (layflag[1] == 0))
                 {
                     using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
                     {
@@ -223,12 +224,12 @@
                         sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
                         sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
-                        flag = false;
+                        layflag[1] = 1;
                     }
                 }
 
 
-                if ((lay == 800) && (flag == false))
+                if ((lay == 800) && (layflag[2] == 0))
                 {
                     using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
                     {
@@ -239,12 +240,12 @@
                         sw.WriteLine("winddir = " + Math.Round(s.windDir,3).ToString());
                         sw.WriteLine("windspeed = " + Math.Round(s.windSpeed,3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
-                        flag = true;
+                        layflag[2] = 1;
                     }
 
                 }
 
-                if ((lay == 1200) && (flag == true))
+                if ((lay == 1200) && (layflag[3] == 0))
                 {
                     using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
                     {
@@ -255,12 +256,12 @@
                         sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
                         sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
-                        flag = false;
+                        layflag[3] = 1;
                     }
 
                 }
 
-                if ((lay == 1600) && (flag == false))
+                if ((lay == 1600) && (layflag[4] == 0))
                 {
                     using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
                     {
@@ -271,13 +272,13 @@
                         sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
                         sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
-                        flag = true;
+                        layflag[4] = 1;
                     }
 
 
                 }
 
-                if ((lay == 2000) && (flag == true))
+                if ((lay == 2000) && (layflag[5] == 0))
                 {
                     using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
                     {
@@ -288,12 +289,12 @@
                         sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
                         sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
-                        flag = false;
+                        layflag[5] = 1;
                     }
 
                 }
 
-                if ((lay == 2400) && (flag == false))
+                if ((lay == 2400) && (layflag[6] == 0))
                 {
                     using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
                     {
@@ -304,11 +305,11 @@
                         sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
                         sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
-                        flag = true;
+                        layflag[6] = 1;
                     }
                 }
 
-                if ((lay == 3000) && (flag == true))
+                if ((lay == 3000) && (layflag[7] == 0))
                 {
                     using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
                     {
@@ -319,11 +320,11 @@
                         sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
                         sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
-                        flag = false;
+                        layflag[7] = 1;
                     }
                 }
 
-                if ((lay == 3500) && (flag == false))
+                if ((lay == 3500) && (layflag[8] == 0))
                 {
 
                     using (StreamWriter sw = new StreamWriter(gmbControlWindow.nowpath, true, System.Text.Encoding.Default))
@@ -335,7 +336,7 @@
                         sw.WriteLine("winddir = " + Math.Round(s.windDir, 3).ToString());
                         sw.WriteLine("windspeed = " + Math.Round(s.windSpeed, 3).ToString());
                         sw.WriteLine(System.Environment.NewLine);
-                        flag = true;
+                        layflag[8] = 1;
                     }
                 }
 
@@ -345,7 +346,7 @@
 
             if (rec == false)
             {
-
+                Array.Clear(layflag, 0, layflag.Length);
 
             }
 
